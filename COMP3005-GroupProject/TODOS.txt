@@ -1,0 +1,8 @@
+TODOS:
+-implement rescheduleMemberPTSession, cancelMemberPTSession, unscheduleMemberGroupFitness
+-Fully comment code
+-Finish adding cloured texts where needed
+-Cleanup code where possible
+
+
+

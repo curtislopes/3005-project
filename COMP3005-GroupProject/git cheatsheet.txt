@@ -1,0 +1,57 @@
+Git cheatsheet
+
+To start, if you'd rather use vim than nano for commit messages you can change to vim with: 'git config --global core.editor "vim"'
+If its your first time using git you will also need to set these commands before you can make your first commit:
+"git config --global user.email you@example.com"
+"git config --global user.name username"
+
+The first thing you must do is to get the repository and its branches locally:
+1. "git clone https://github.com/GreyLime/COMP3005-GroupProject.git"
+2. "git fetch" makes sure the cloned repo is fully up to date.
+
+IMPORTANT:
+To allow everyone to always start working on the most recent version of our project, you must merge your branch with the master branch when you are done working. Also, always set your feature branch to be the same as the remote master branch when you start working. The steps below will outline this process. This also helps prevent merge conflicts, which can be quite annoying.
+
+General workflow commands:
+
+-Start working- 
+When you start working you should always update your feature branch to be the same as remote master:
+1. (safety step to make sure on the right branch): "git checkout features-firstname"
+2. (another safety step, make sure you have no outstanding commits that you forgot to push, it should say "up to date"): "git status"
+3. "git fetch origin" to get all the changes that have been made to all branches from the remote repo. (very important)
+4. reset your feature branch to be the same as master: "git reset --hard origin/master" (this will make sure your new features are being added to the latest version of the project).
+
+-While working-
+It's generally a good idea to commit any push intermediary changes at several points during your work session so that you can always hop back to a previous commit if need be. This is as simple as running "git commit -a", and typing a message for whatever you added or changed, and then "git push origin features-firstname". Note: you should always add a commit message to make clear what you have changed, doesn't have to be overly detailed.
+in order:
+1. "git add --all" This step is only necessary if you have created new files that weren't previously committed to git i.e. were untracked.
+1.5 "git rm filename" This step is only necessary if you have a file that you deleted that was previously tracked, and you dont want it to be committed.
+2. "git commit -a" commits all changes made to tracked files.
+2.5 "git commit -a --amend" will allow you to make a change to your preivous commit, without creating a brand new commit.
+3. "git push origin features-firstname" (note: add -ff to the end of the command if it says branches have diverged, but only if you are sure that you want to overwrite your remote branch to match your local branch)
+
+-Stop working-
+When you're done working for the day, you can push all of your changes that you made on your feature branch to the master branch.
+commands in order:
+1. "git checkout master" switches branch to master
+2. "git pull" (VERY IMPORTANT STEP: make sure your local master is up to date with remote master before merging to avoid merge conflicts)
+3. "git merge features-yourname"
+3. "git push origin master"
+
+-General Commands + Explanations-
+
+Branches:
+To check what branch you are on: "git status"
+To switch branches: "git checkout branch-name", in your case you'll want to switch to and from your feature branch which is "features-firstname".
+
+Comitting - Once you have made local changes that you want to push to the remote repository, do "git commit -a", -a flag will add changes that have been made to *tracked* files to the commit. If you created new files or removed files, you will need to add or remove them from git's file tracker with "git add --all" or "git rm filename".
+"git commit -a --amend" will allow you to make a change to your preivous commit, without creating a brand new commit.
+
+Pushing - After you have committed your changes and are ready to push them to the remote repository, push with: "git push origin features-firstname"
+(note: add -ff to the end of the command if it says branches have diverged, but only if you are sure that you want to overwrite your remote branch to match your local branch)
+
+Merging - to merge your feature branch with remote master: 
+1. "git checkout master"
+2. "git pull" (VERY IMPORTANT STEP: make sure your local master is up to date with remote master before merging to avoid merge conflicts)
+3. "git merge features-yourname"
+3. "git push origin master"
